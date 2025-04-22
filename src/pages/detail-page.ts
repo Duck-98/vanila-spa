@@ -6,7 +6,7 @@ import {
 } from "../core/gallery/actions";
 import { getRouter } from "../core/router";
 import { fetchImageById } from "../service/api";
-import { getOptimizedImageUrl } from "../utils/imageLoader";
+import { getPokemonImageUrl } from "../utils/imageLoader";
 
 export class DetailPage {
   private element: HTMLElement;
@@ -59,8 +59,9 @@ export class DetailPage {
     try {
       // 상태에서 이미지를 먼저 찾기
       const state = galleryStore.getState();
+      console.log(state, "STATE");
       let image = state.images.find((img) => img.id === this.imageId);
-
+      console.log(image, "IMAGE");
       // 없으면 API에서 가져오기
       if (!image) {
         const fetchedImage = await fetchImageById(this.imageId);
@@ -81,7 +82,7 @@ export class DetailPage {
 
   private renderImage(image: any): void {
     // 최적화된 큰 이미지 URL 생성
-    const optimizedUrl = getOptimizedImageUrl(image.id, 800, 600);
+    const optimizedUrl = getPokemonImageUrl(image.id);
 
     this.element.innerHTML = `
       <div class="image-detail fade-in">

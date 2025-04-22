@@ -4,6 +4,7 @@ import { initRouter, getRouter } from "./core/router";
 import { initHeader } from "./components/common/header";
 import { createHomePage } from "./pages/home-page";
 import { createDetailPage } from "./pages/detail-page";
+import { createFavoritesPage } from "./pages/favorite-page";
 
 // 404 페이지 컴포넌트
 const NotFoundPage = (): HTMLElement => {
@@ -47,9 +48,8 @@ const initApp = (): void => {
 
   // 라우트 등록
   router.addRoute("/", createHomePage, true);
-  // 나중에 다음과 같은 추가 라우트를 등록할 수 있습니다:
-  router.addRoute("/image/:id", createDetailPage);
-  // router.addRoute('/favorites', createFavoritesPage);
+  router.addRoute("/pokemon/:id", createDetailPage);
+  router.addRoute("/favorites", createFavoritesPage);
 };
 
 // 앱 시작
