@@ -1,7 +1,7 @@
 import { toggleFavorite } from "../../core/gallery/actions";
 import { getRouter } from "../../core/router";
 import { GalleryImage } from "../../types/image.type";
-import { getOptimizedImageUrl, lazyLoadImage } from "../../utils/imageLoader";
+import { getPokemonImageUrl, lazyLoadImage } from "../../utils/imageLoader";
 
 export class ImageCard {
   private image: GalleryImage;
@@ -16,29 +16,29 @@ export class ImageCard {
 
   private render(): void {
     this.element.innerHTML = `
-      <div class="image-card__img-container">
-        <img class="image-card__img" alt="${this.image.author}의 이미지" />
+    <div class="image-card__img-container">
+      <img class="image-card__img" alt="${this.image.author} 포켓몬" />
+    </div>
+    <div class="image-card__info">
+      <h3 class="image-card__title">${this.image.author}</h3>
+      <p class="image-card__author">ID: ${this.image.id}</p>
+      <div class="image-card__actions">
+        <button class="favorite-btn ${this.image.isFavorite ? "active" : ""}">
+          ${this.image.isFavorite ? "★" : "☆"}
+        </button>
+        <a href="/pokemon/${
+          this.image.id
+        }" class="view-details-btn" data-link>상세보기</a>
       </div>
-      <div class="image-card__info">
-        <h3 class="image-card__title">Photo by ${this.image.author}</h3>
-        <p class="image-card__author">ID: ${this.image.id}</p>
-        <div class="image-card__actions">
-          <button class="favorite-btn ${this.image.isFavorite ? "active" : ""}">
-            ${this.image.isFavorite ? "★" : "☆"}
-          </button>
-          <a href="/image/${
-            this.image.id
-          }" class="view-details-btn" data-link>상세보기</a>
-        </div>
-      </div>
-    `;
+    </div>
+  `;
 
     // 이미지 지연 로딩 적용
     const imgElement = this.element.querySelector(
       ".image-card__img",
     ) as HTMLImageElement;
     if (imgElement) {
-      const optimizedUrl = getOptimizedImageUrl(this.image.id, 400, 300);
+      const optimizedUrl = getPokemonImageUrl(this.image.id);
       lazyLoadImage(imgElement, optimizedUrl);
     }
 
