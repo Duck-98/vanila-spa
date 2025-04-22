@@ -1,4 +1,5 @@
 import { galleryStore } from ".";
+import { GALLERY_FAVORITES_STORAGE_KEY } from "../../constants/storage";
 import { GalleryImage } from "../../types/image.type";
 
 // 이미지 로드 시작 액션
@@ -37,7 +38,10 @@ export const toggleFavorite = (imageId: string): void => {
       : [...state.favorites, imageId];
 
     // 로컬 스토리지에 저장
-    localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(newFavorites));
+    localStorage.setItem(
+      GALLERY_FAVORITES_STORAGE_KEY,
+      JSON.stringify(newFavorites),
+    );
 
     // 이미지 목록에도 즐겨찾기 상태 업데이트
     const updatedImages = state.images.map((img) =>
