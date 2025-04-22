@@ -7,7 +7,7 @@ export const lazyLoadImage = (
   imgElement: HTMLImageElement,
   src: string,
 ): void => {
-  // 기본 로딩 이미지 설정
+  // 기본 로딩 이미지 설정 (포켓볼 SVG로 변경하면 더 좋을 것 같습니다)
   imgElement.src =
     "data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox%3D'0 0 300 200'%2F%3E";
 
@@ -35,16 +35,11 @@ export const lazyLoadImage = (
 };
 
 /**
- * 이미지 최적화된 URL을 생성하는 함수
- * @param id 이미지 ID
- * @param width 원하는 너비
- * @param height 원하는 높이
- * @returns 최적화된 이미지 URL
+ * 포켓몬 이미지 URL을 가져오는 함수
+ * @param id 포켓몬 ID
+ * @returns 포켓몬 이미지 URL
  */
-export const getOptimizedImageUrl = (
-  id: string,
-  width: number = 300,
-  height: number = 200,
-): string => {
-  return `https://picsum.photos/id/${id}/${width}/${height}`;
+export const getPokemonImageUrl = (id: string): string => {
+  // 포켓몬 API의 공식 아트워크 이미지 URL 형식 사용
+  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 };
